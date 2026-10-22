@@ -23,13 +23,12 @@ jobs:
         with:
           python-version: '3.12'
           # Bật lại cache mượt mà bằng cách chỉ rõ đường dẫn file
-          cache: 'pip'
           cache-dependency-path: 'crawler/requirements-crawler.txt'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements-crawler.txt
+          pip install -r crawler/requirements-crawler.txt
 
       - name: Run Scrapy Crawler
         env:
