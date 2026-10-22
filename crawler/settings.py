@@ -25,6 +25,10 @@ DOWNLOADER_MIDDLEWARES = {
     #"middlewares.RotateProxyMiddleware": 410,
 }
 
+ITEM_PIPELINES = {
+    "pipeline.MongoPipeline": 300,
+}
+
 RETRY_ENABLED = True
 RETRY_TIMES = 3
 RETRY_HTTP_CODES = [429, 500, 502, 503, 504]

@@ -1,6 +1,6 @@
 import scrapy
 from datetime import datetime
-from crawler.items import ProductDetailItem
+from items import ProductDetailItem
 
 class MasterDetailSpider(scrapy.Spider):
     name = "master_detail"
