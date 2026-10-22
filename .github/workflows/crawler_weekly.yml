@@ -36,4 +36,6 @@ jobs:
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
         run: |
-          scrapy crawl chotot_laptop -s CLOSESPIDER_PAGECOUNT=10
+          export PYTHONPATH=.
+          export SCRAPY_SETTINGS_MODULE=settings
+          scrapy crawl chotot_laptop -s SETTINGS_MODULE=settings -s CLOSESPIDER_PAGECOUNT=10
