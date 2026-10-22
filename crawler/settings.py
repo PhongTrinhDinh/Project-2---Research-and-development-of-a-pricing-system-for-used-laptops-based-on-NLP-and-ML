@@ -1,7 +1,7 @@
 BOT_NAME = "Crawler"
 
-SPIDER_MODULES = ["crawler.spiders"]
-NEWSPIDER_MODULE = "crawler.spiders"
+SPIDER_MODULES = ["spiders"]
+NEWSPIDER_MODULE = "spiders"
 
 ROBOTSTXT_OBEY = False
 
@@ -21,8 +21,8 @@ AUTOTHROTTLE_DEBUG = False
 
 DOWNLOADER_MIDDLEWARES = {
     "scrapy.downloadermiddlewares.useragent.UserAgentMiddleware": None,
-    "crawler.middlewares.RotateIdentityMiddleware": 400,
-    #"crawler.middlewares.RotateProxyMiddleware": 410,
+    "middlewares.RotateIdentityMiddleware": 400,
+    #"middlewares.RotateProxyMiddleware": 410,
 }
 
 RETRY_ENABLED = True
