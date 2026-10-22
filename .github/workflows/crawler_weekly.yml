@@ -1,0 +1,41 @@
+name: Weekly Laptop Crawler
+
+# Lịch chạy tự động
+on:
+  schedule:
+    # Chạy vào 00:00 sáng Thứ Hai hàng tuần (theo giờ UTC, tức 07:00 sáng giờ Việt Nam)
+    # Cú pháp Cron: Phút Giờ Ngày Tháng Thứ (0 = Chủ Nhật, 1 = Thứ 2)
+    - cron: '0 0 * * 1'
+  
+  # Cho phép bấm nút chạy thủ công (Manual run) bất kỳ lúc nào để test trên GitHub UI
+  workflow_dispatch:
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Kéo toàn bộ code từ Repository về máy ảo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Cài đặt môi trường Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip' # Cache pip để lần sau tải thư viện nhanh hơn
+
+      # 3. Cài đặt các thư viện cần thiết
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 4. Thực thi cào dữ liệu và truyền Secret vào biến môi trường
+      - name: Run Scrapy Crawler
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+        run: |
+          # Giới hạn cào 100 trang để tránh quá thời gian máy ảo GitHub Actions
+          scrapy crawl chotot_laptop -s CLOSESPIDER_PAGECOUNT=100
