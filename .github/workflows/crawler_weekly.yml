@@ -31,6 +31,8 @@ jobs:
           pip install -r requirements-crawler.txt
 
       - name: Run Scrapy Crawler
+        # THÊM DÒNG NÀY ĐỂ CHUI VÀO THƯ MỤC CRAWLER CHỨA FILE scrapy.cfg
+        working-directory: ./crawler
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
         run: |
