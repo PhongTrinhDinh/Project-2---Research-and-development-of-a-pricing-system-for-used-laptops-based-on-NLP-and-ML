@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+env/
+ENV/
+
+# Secrets and local environment configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Data and generated model artifacts (keep large/local files out of Git)
+data/raw/
+data/interim/
+data/processed/
+datasets/
+artifacts/
+models/
+checkpoints/
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+*.parquet
+*.tfrecord
+
+# Experiment tracking, logs, and caches
+mlruns/
+mlartifacts/
+wandb/
+neptune/
+.dvc/cache/
+.cache/
+cache/
+logs/
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local process and container overrides
+*.pid
+*.sock
+docker-compose.override.yml
