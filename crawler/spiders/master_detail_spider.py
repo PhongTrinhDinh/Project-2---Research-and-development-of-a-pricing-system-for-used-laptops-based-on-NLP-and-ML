@@ -3,7 +3,7 @@ from datetime import datetime
 from items import ProductDetailItem
 
 class MasterDetailSpider(scrapy.Spider):
-    name = "master_detail"
+    name = "chotot_laptop"
     
     # URL khởi đầu cho trang danh sách (Master)
     start_urls = ["https://www.chotot.com/mua-ban-laptop-ha-noi?event_source=ct_home_highlight_category"]
