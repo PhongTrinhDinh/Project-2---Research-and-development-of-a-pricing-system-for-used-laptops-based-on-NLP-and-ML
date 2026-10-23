@@ -1,3 +1,8 @@
+import os
+
+MONGO_URI = os.getenv("MONGO_URI")
+MONGO_DATABASE = os.getenv("MONGO_DATABASE", "scrapy_db")
+
 BOT_NAME = "Crawler"
 
 SPIDER_MODULES = ["spiders"]
