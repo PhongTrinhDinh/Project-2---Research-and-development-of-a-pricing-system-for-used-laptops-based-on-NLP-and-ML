@@ -38,4 +38,4 @@ jobs:
         run: |
           export PYTHONPATH=.
           export SCRAPY_SETTINGS_MODULE=settings
-          scrapy crawl chotot_laptop -s SETTINGS_MODULE=settings -s CLOSESPIDER_PAGECOUNT=10
+          scrapy crawl chotot_laptop -s SETTINGS_MODULE=settings -s CLOSESPIDER_ITEMCOUNT=500
