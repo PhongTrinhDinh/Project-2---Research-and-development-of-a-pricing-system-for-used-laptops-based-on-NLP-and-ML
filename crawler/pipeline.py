@@ -15,20 +15,30 @@ class MongoPipeline:
             mongo_db=crawler.settings.get("MONGO_DATABASE", "scrapy_db")
         )
         
-    def open_spider(self, spider):
+    def open_spider(self, spider=None):
+        if not self.mongo_uri:
+            self.client = None
+            self.db = None
+            return
         self.client = pymongo.MongoClient(self.mongo_uri)
         self.db = self.client[self.mongo_db]
         
-    def close_spider(self, spider):
-        self.client.close()
+    def close_spider(self, spider=None):
+        if self.client:
+            self.client.close()
         
-    def process_item(self, item, spider):
+    def process_item(self, item, spider=None):
+        if self.db is None:
+            return item
+
         adapter = ItemAdapter(item)
         data = adapter.asdict()
         
+        query = {"list_id": data["list_id"]} if data.get("list_id") else {"url": data.get("url")}
         self.db[self.collection_name].update_one(
-            {"url": data["url"]},
+            query,
             {"$set": data},
             upsert=True
         )
         return item
+
