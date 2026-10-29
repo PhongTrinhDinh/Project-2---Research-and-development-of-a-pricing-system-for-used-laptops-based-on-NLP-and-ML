@@ -178,7 +178,7 @@ def test_ingest_bronze_layer_write_failure(mock_env, mock_spark_pipeline, mock_s
 def test_ingest_bronze_layer_custom_env_paths(monkeypatch, mock_spark_pipeline, mock_spark_functions):
     """Kiểm tra pipeline xây dựng đúng URI và output path với các giá trị môi trường tùy chỉnh khác nhau."""
     custom_env = {
-        "MONGO_URI": "mongodb+srv://admin:pass@cluster.mongodb.net",
+        "MONGO_URI": "mongodb://test-host:27017",
         "MONGO_DB": "prod_warehouse",
         "MONGO_COLL_RAW": "chotot_crawler_v2",
         "DATALAKE_BRONZE_DIR": "s3a://my-lake-bucket/bronze/laptops",
@@ -193,7 +193,7 @@ def test_ingest_bronze_layer_custom_env_paths(monkeypatch, mock_spark_pipeline, 
     with patch("src.data_pipeline.bronze_layer.create_spark_session", return_value=mock_spark):
         ingest_bronze_layer()
 
-    expected_full_uri = "mongodb+srv://admin:pass@cluster.mongodb.net/prod_warehouse.chotot_crawler_v2"
+    expected_full_uri = "mongodb://test-host:27017/prod_warehouse.chotot_crawler_v2"
     mock_reader.option.assert_any_call("uri", expected_full_uri)
     mock_writer.save.assert_called_once_with("s3a://my-lake-bucket/bronze/laptops")
     mock_spark.stop.assert_called_once()
